@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A simple directive for convenient usage of html5 drag and drop in AngularJS",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "./node_modules/.bin/bower install && node compile.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/madcowpp/dcDragAndDrop",
   "devDependencies": {
+    "bower": "^1.4.1",
     "closure-compiler": "^0.2.6"
   }
 }
