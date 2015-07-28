@@ -1,0 +1,27 @@
+{
+  "name": "dcDragAndDrop",
+  "version": "0.0.1",
+  "description": "A simple directive for convenient usage of html5 drag and drop in AngularJS",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/madcowpp/dcDragAndDrop.git"
+  },
+  "keywords": [
+    "drag",
+    "drop",
+    "angular",
+    "directive"
+  ],
+  "author": "Paul Podlech",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/madcowpp/dcDragAndDrop/issues"
+  },
+  "homepage": "https://github.com/madcowpp/dcDragAndDrop",
+  "devDependencies": {
+    "closure-compiler": "^0.2.6"
+  }
+}
