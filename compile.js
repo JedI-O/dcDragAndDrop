@@ -4,8 +4,7 @@ var fileName = 'dist/dcDaD.min.js';
 
 var options =
   {
-    compilation_level: 'SIMPLE_OPTIMIZATIONS',
-    externs: 'src/externs.js'
+    compilation_level: 'SIMPLE_OPTIMIZATIONS'
   };
 
 function aftercompile (err, stdout, stderr) {
