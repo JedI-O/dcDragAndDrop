@@ -5,40 +5,39 @@ angular.module('dcDragAndDropDemo', ['dcDragAndDrop'])
   $scope.text = "Drop Here!";
   $scope.status = "idle"
 
-  $scope.test = function(){
+  $scope.test = function(evt){
     alert('test');
   }
 
    $scope.handleDragStart = function(e) {
-      this.style.opacity = '0.5';
+      var element = e.srcElement;
+      element.style.opacity = '0.5';
       $scope.status = 'Dragging!';
-      $scope.$apply();
-      e.dataTransfer.setData('element', this.innerHTML);
+      e.dataTransfer.setData('element', element.innerHTML);
     };
 
     $scope.handleDragEnd = function(e) {
-      this.style.opacity = '1';
+      e.srcElement.style.opacity = '1';
       $scope.status = 'idle';
-      $scope.$apply();
     };
 
     $scope.handleDragOver = function(e) {
       if (e.preventDefault) {
         e.preventDefault();
       }
-      this.style.background = 'red';
+      e.srcElement.style.background = 'red';
       return false;
     };
 
     $scope.handleDragLeave = function(e) {
-      this.style.background = 'blue';
+      e.srcElement.style.background = 'blue';
       return false;
     };
 
     $scope.handleDrop = function(e){
       console.log(e.dataTransfer.getData("element"));
-      this.innerHTML= e.dataTransfer.getData('element');
-      this.style.background = 'green'
+      e.srcElement.innerHTML= e.dataTransfer.getData('element');
+      e.srcElement.style.background = 'green'
 };
 
 });

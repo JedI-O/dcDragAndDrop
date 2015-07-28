@@ -1,45 +1,45 @@
 (function(angular){
-angular.module('dcDragAndDrop', []);
-angular.module('dcDragAndDrop').directive('dcDraggable', function() {
-	return {
-		restrict : "A",
-		scope: {
-			handleDragStart: "=",
-			handleDragEnd: "=",
-			handleDragEnter: "="
-		},
-		link : function(scope, element, attrs) {
-			element.attr('draggable', 'true');
-			element.on("dragstart", scope.handleDragStart);
-			element.on("dragend", scope.handleDragEnd);
-			element.on("dragenter", scope.handleDragEnter);
-		}
-	}
-});
 
-angular.module('dcDragAndDrop').directive('dcDroppable', function(){
+angular.module('dcDragAndDrop', []);
+angular.module('dcDragAndDrop').directive('dcDragstart', ['$parse', function($parse) {
 	return {
-		restrict : "A",
-		scope: {
-			handleDrop: '=',
-			handleDragOver: '=',
-			handleDragLeave: '='
-		},
-		link : function(scope, element, attrs) {
-			myElement = element;
-			if(scope.handleDrop)
-				element.on("drop", scope.handleDrop);
-			if(scope.handleDragOver)
-				element.on("dragover", scope.handleDragOver);
-			else
-				element.on("dragover", function(e){
-					if(e.preventDefault){
-						e.preventDefault();
-					}
-				});
-			if(scope.handleDragLeave)
-				element.on("dragleave", scope.handleDragLeave);
+		restrict: 'A',
+		compile: function($element, attr) {
+			return function ngEventHandler(scope, element) {
+				element.attr('draggable', 'true');
+				'Dragstart Dragend Dragenter'.split(' ').forEach(function(attrName){
+					var evtName = attrName.toLowerCase();
+					attrName = 'dc'+attrName;
+				  var fn = $parse(attr[attrName], /* interceptorFn */ null, /* expensiveChecks */ true);
+				  element.on(evtName, function(event) {
+				  	var callback = function() {
+				  		fn(scope, {$event:event});
+				  	};
+				  	scope.$apply(callback);
+				  });
+			  });
+			};
 		}
-	}
-});
+}}]);
+
+angular.module('dcDragAndDrop').directive('dcDroppable', ['$parse', function($parse) {
+	return {
+		restrict: 'A',
+		compile: function($element, attr) {
+			return function ngEventHandler(scope, element) {
+				element.attr('draggable', 'true');
+				'Drop Dragover Dragleave'.split(' ').forEach(function(attrName){
+					var evtName = attrName.toLowerCase();
+					attrName = 'dc'+attrName;
+					var fn = $parse(attr[attrName], /* interceptorFn */ null, /* expensiveChecks */ true);
+					element.on(evtName, function(event) {
+						var callback = function() {
+							fn(scope, {$event:event});
+						};
+						scope.$apply(callback);
+					});
+				});
+			};
+		}
+	}}]);
 })(angular);
