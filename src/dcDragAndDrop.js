@@ -18,7 +18,6 @@ angular.module('dcDragAndDrop').directive('dcDraggable', function() {
 });
 
 angular.module('dcDragAndDrop').directive('dcDroppable', function(){
-	var listeners = [];
 	return {
 		restrict : "A",
 		scope: {
@@ -40,12 +39,6 @@ angular.module('dcDragAndDrop').directive('dcDroppable', function(){
 				});
 			if(scope.handleDragLeave)
 				element.on("dragleave", scope.handleDragLeave);
-
-			element.on('$destroy', function(){
-				listeners.forEach(function(listener){
-					element.unbind(listener);
-				});
-			});
 		}
 	}
 });
