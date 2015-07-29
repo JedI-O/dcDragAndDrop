@@ -4,24 +4,19 @@
   <head>
     <meta charset="utf-8" />
     <script src="../bower_components/angular/angular.js"></script>
-    <script src="../src/dcDragAndDrop.js"></script>
+    <script src="../dist/dcDaD.min.js"></script>
     <script src="demo.js"></script>
   </head>
 
   <body ng-app="dcDragAndDropDemo" ng-controller="DemoCtrl">
+    Text to drop:<input ng-model="dropText">
     <div dc-dragstart="handleDragStart($event)"
-    dc-dragenter="handleDragEnter($event)"
-    dc-dragend="handleDragEnd($event)"
-    ng-click="test()">Drag me!</div>
-    <br>
+    dc-dragend="handleDragEnd($event)">Drag me!</div>
     <br>
     <div dc-droppable dc-drop="handleDrop($event)"
     dc-dragover="handleDragOver($event)"
     dc-dragleave="handleDragLeave($event)">tesasdasdasdt asdasdasdasdasdasd<br><br>asdasd</div>
-    <div>{{status}}</div>
-    <div dc-droppable dc-drop="handleDrop($event)"
-    dc-dragover="handleDragOver($event)"
-    dc-dragleave="handleDragLeave($event)">tesasdasdasdt asdasdasdasdasdasd<br><br>asdasd</div>
+    <div>Status: {{status}}</div>
   </body>
 
 </html>

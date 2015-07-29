@@ -13,7 +13,7 @@ angular.module('dcDragAndDropDemo', ['dcDragAndDrop'])
       var element = e.srcElement;
       element.style.opacity = '0.5';
       $scope.status = 'Dragging!';
-      e.dataTransfer.setData('element', element.innerHTML);
+      e.dataTransfer.setData('element', $scope.dropText ? $scope.dropText : element.innerHTML);
     };
 
     $scope.handleDragEnd = function(e) {
@@ -35,6 +35,7 @@ angular.module('dcDragAndDropDemo', ['dcDragAndDrop'])
     };
 
     $scope.handleDrop = function(e){
+      e.preventDefault();
       console.log(e.dataTransfer.getData("element"));
       e.srcElement.innerHTML= e.dataTransfer.getData('element');
       e.srcElement.style.background = 'green'
