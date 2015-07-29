@@ -11,21 +11,24 @@ angular.module('dcDragAndDropDemo', ['dcDragAndDrop'])
 
    $scope.handleDragStart = function(e) {
       var element = e.srcElement;
+      if(!element.style){
+        e.preventDefault();
+        return false;
+      }
       element.style.opacity = '0.5';
       $scope.status = 'Dragging!';
       e.dataTransfer.setData('element', $scope.dropText ? $scope.dropText : element.innerHTML);
     };
 
     $scope.handleDragEnd = function(e) {
-      e.srcElement.style.opacity = '1';
+      if(e.srcElement.style) e.srcElement.style.opacity = '1';
       $scope.status = 'idle';
     };
 
     $scope.handleDragOver = function(e) {
-      if (e.preventDefault) {
+      if (e.preventDefault && e.dataTransfer.getData('element')) {
         e.preventDefault();
       }
-      e.srcElement.style.background = 'red';
       return false;
     };
 
@@ -34,9 +37,12 @@ angular.module('dcDragAndDropDemo', ['dcDragAndDrop'])
       return false;
     };
 
+    $scope.handleDragEnter = function(e){
+      e.srcElement.style.background = 'red';
+    }
+
     $scope.handleDrop = function(e){
       e.preventDefault();
-      console.log(e.dataTransfer.getData("element"));
       e.srcElement.innerHTML= e.dataTransfer.getData('element');
       e.srcElement.style.background = 'green'
 };
