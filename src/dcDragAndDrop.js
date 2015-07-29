@@ -7,7 +7,7 @@ angular.module('dcDragAndDrop').directive('dcDragstart', ['$parse', function($pa
 		compile: function($element, attr) {
 			return function ngEventHandler(scope, element) {
 				element.attr('draggable', 'true');
-				'Dragstart Dragend Dragenter'.split(' ').forEach(function(attrName){
+				'Dragstart Dragend Drag'.split(' ').forEach(function(attrName){
 					var evtName = attrName.toLowerCase();
 					attrName = 'dc'+attrName;
 				  var fn = $parse(attr[attrName], /* interceptorFn */ null, /* expensiveChecks */ true);
@@ -28,7 +28,7 @@ angular.module('dcDragAndDrop').directive('dcDroppable', ['$parse', function($pa
 		compile: function($element, attr) {
 			return function ngEventHandler(scope, element) {
 				element.attr('draggable', 'true');
-				'Drop Dragover Dragleave'.split(' ').forEach(function(attrName){
+				'Drop Dragover Dragenter Dragleave'.split(' ').forEach(function(attrName){
 					var evtName = attrName.toLowerCase();
 					attrName = 'dc'+attrName;
 					var fn = $parse(attr[attrName], /* interceptorFn */ null, /* expensiveChecks */ true);
