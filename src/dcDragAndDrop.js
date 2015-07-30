@@ -10,6 +10,7 @@ angular.module('dcDragAndDrop').directive('dcDragstart', ['$parse', function($pa
 				'Dragstart Dragend Drag'.split(' ').forEach(function(attrName){
 					var evtName = attrName.toLowerCase();
 					attrName = 'dc'+attrName;
+					if(!attr[attrName]) return;
 				  var fn = $parse(attr[attrName], /* interceptorFn */ null, /* expensiveChecks */ true);
 				  element.on(evtName, function(event) {
 				  	var callback = function() {
@@ -31,6 +32,7 @@ angular.module('dcDragAndDrop').directive('dcDroppable', ['$parse', function($pa
 				'Drop Dragover Dragenter Dragleave'.split(' ').forEach(function(attrName){
 					var evtName = attrName.toLowerCase();
 					attrName = 'dc'+attrName;
+					if(!attr[attrName]) return;
 					var fn = $parse(attr[attrName], /* interceptorFn */ null, /* expensiveChecks */ true);
 					element.on(evtName, function(event) {
 						var callback = function() {
